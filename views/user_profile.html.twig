@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="Description" content="WWW Programmierung Hausarbeit WS2018">
+        <meta name="author" content="Jonas Leonhard, 611179">
+
+        <link rel = "stylesheet" type = "text/css" href = "/views/indexstyle.css"media="screen" />
+        <link rel = "stylesheet" type = "text/css" href = "/views/profilestyle.css"media="screen" />
+
+        <title> {{ pagetitle|escape }}</title>
+    {% endblock %}
+</head>
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        {% if not user %}
+            <li class = "register"><a href="/user/register">Register</a></li>
+            <li class = "login"><a href="/user/login">Login</a></li>
+        {% endif %}
+        {% if user %}
+            <li><a href="/entry">Entry</a></li>
+            <li><a  class="active" href ="/user/get/{{ user.username }}">Profile</a></li>
+            <li class = "logout"><a href="/user/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+</div>
+<body>
+
+<!-- FLASH MESSAGES-->
+{% if error %}
+    <div class="alert"> {{ error }}</div>
+{% endif %}
+<div class="wrapper">
+<!-- SUCCESSFUL: USERPROFILE FOUND -->
+{% if userprofile %}
+    <div class="username"> Username: {{ userprofile.username }}</div>
+    <div class="name"> Name: {{ userprofile.name }}</div>
+    <div class="email"> Email: {{ userprofile.email }}</div>
+    <img class = "profileimg" src="/views/uploads/{{ userprofile.profileimg }}">
+</div>
+    <!-- THIS IS THE ACCOUNT YOU ARE LOGGED INTO-->
+    {% if userprofile.username == user.username %}
+            <div class="flash"> THIS IS MY ACCOUNT!</div>
+    {% endif %}
+{% endif %}
+
+
+</body>
+</html>

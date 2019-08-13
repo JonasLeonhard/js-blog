@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="Description" content="WWW Programmierung Hausarbeit WS2018">
+    <meta name="author" content="Jonas Leonhard, 611179">
+
+
+    <link rel = "stylesheet" type = "text/css" href = "/views/indexstyle.css"media="screen" />
+    <link rel = "stylesheet" type = "text/css" href = "/views/homestyle.css"media="screen" />
+
+    <title>JonasLeonhard,611179.com</title>
+    {% endblock %}
+</head>
+
+<body>
+
+<div class="navbar">
+<ul>
+    <li><a class="active" href="/">Home</a></li>
+    {% if not user %}
+    <li class = "register"><a href="/user/register">Register</a></li>
+    <li class = "login"><a href="/user/login">Login</a></li>
+    {% endif %}
+    {% if user %}
+    <li><a href="/entry">Entry</a></li>
+        <li><a href ="/user/get/{{ user.username }}">Profile</a></li>
+    <li class = "logout"><a href="/user/logout">Logout</a></li>
+    {% endif %}
+</ul>
+</div>
+<!--if flash message from registration form:-->
+{% if messages()%}
+    {% if not user %}
+    <div class = "flash" >you are now registered, login with your accountdata!</div>
+
+        {% else %}
+            <div class = "flash">Welcome {{ user.username }}!</div>
+        {% endif %}
+
+{% endif %}
+
+{% if message.error %}
+    <div class ="alert">{{ message.error }}</div>
+{% endif %}
+
+{% if message.loginsuccess %}
+<div class="flash"> {{ message.loginsuccess }} {{ user.username }}</div>
+{% endif %}
+
+
+
+<div class = "header">
+</div>
+<!-- DEPRECATED CREATE BLOGPOST LINK: only visible if user
+<div>
+    <a href = /entry >
+        create BlogPost:
+    </a>
+
+    <form action= /entry method="post">
+        <input type="submit" value="Add Post...">
+    </form>
+</div>
+-->
+
+
+
+<div class="blogwrapper">
+    {%  for post in data %}
+
+    <ul>
+
+
+            <!-- BLOG USERNAME/PROFILEIMG-->
+            <a class="blogusername" href = /user/get/{{ post.username|escape }}>
+
+                <!-- PROFILE IMG OF USER -->
+                <img class = "profileimg" src="/views/uploads/{{ post.profileimg }}">
+
+                <!-- BLOG USERNAME-->
+
+                {{ post.username|escape }}
+                at {{ post.publishDate.getDate()|escape }}.{{ post.publishDate.getMonth()+1 |escape }}.{{ post.publishDate.getFullYear()|escape }}
+                - {{ post.publishDate.getHours() |escape }}:{{ post.publishDate.getMinutes() |escape }}
+
+            </a>
+
+        <div class="blogpostcenter">
+            <!-- BLOG TITLE/IMG/TEASER-->
+            <a class = "blogpost" href = /entry/{{ post.postid|escape }}>
+
+            <!-- BLOG TITLE -->
+            <div class="blogtitle">
+                <h1>{{ post.title|escape }} </h1>
+
+            </div>
+
+                {% if post.postimg != null%}
+                    {% if post.postimg != "null" %}
+            <!-- BLOG IMG -->
+            <img class = "blogimg" src="/views/uploads/{{ post.postimg }}">
+                {% endif %}
+                {% endif %}
+            <!-- BLOG TEASERTEXT--><div class = teasertxt>
+            <p>{{ post.teaserText|escape }}</p><br />
+                </div>
+    </a>
+        </div>
+    </ul>
+        <p> </p>
+    {% endfor %}
+
+</div>
+
+</body>
+
+<div class="footer">
+    <li><a href="./documentation">Dokumentation</a></li>
+    <li><a href="./impressum">Impressum</a></li>
+</div>
+</html>
+
+
+
+<!--<details>
+    <summary>more...</summary>
+TXT:{ post.blogText|escape }} |
+</details>-->
+<!-- DEPRECATED MORE BUTTON
+<form action= /entry/{ post.id|escape }} method="get">
+    <input type="submit" value="More...">
+</form>
+-->
+

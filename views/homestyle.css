@@ -1,0 +1,56 @@
+/* CSS Document for index.html.twig - extends indexstyle.css */
+
+.blogpost {
+    color: white;
+}
+
+.blogpostcenter{
+    text-align: center;
+}
+.blogwrapper ul {
+    background: #282828;
+}
+
+.blogwrapper ul:hover{
+    background: #212121;
+}
+
+.profileimg{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.blogimg{
+    width: 80%;
+    height: auto;
+    max-width: 400px;
+    max-height: fit-content;
+}
+
+.teasertxt :hover{
+    opacity: 0.8;
+    transition: .5s ease;
+    opacity: 1;
+}
+
+.blogpostcenter{
+    padding-right: 5%;
+}
+.time{
+
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    h1,h2{
+        font-size: 1.2em;
+    }
+
+    .blogimg{
+        max-width: 300px;
+    }
+}

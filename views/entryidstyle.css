@@ -1,0 +1,94 @@
+/* CSS Document for index.html.twig - extends indexstyle.css */
+
+.blogpost {
+  color: white;
+}
+
+.blogpostcenter {
+  text-align: center;
+}
+.blogwrapper ul {
+  background: #282828;
+}
+
+.blogwrapper ul:hover {
+  background: #212121;
+}
+
+.profileimg {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.blogimg {
+  max-width: 800px;
+  max-height: 700px;
+}
+.blogtext {
+  background: #282828;
+}
+.teasertxt {
+  background: #282828;
+}
+.commentSection {
+  background: #282828;
+}
+.commentSection .title {
+  color: #f44336;
+}
+.button {
+  color: #f44336;
+}
+.delete {
+  margin-top: -3em;
+  float: right;
+  color: #f44336;
+}
+.username {
+  color: royalblue;
+}
+.comment {
+}
+.usrcom {
+  background: #212121;
+}
+
+.blogtext {
+  margin-left: 2.4em;
+  margin-right: 2.4em;
+  margin-top: -0.25em;
+}
+
+.blogtitle {
+  background: #212121;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+}
+.teasertxt {
+  margin-left: 2.4em;
+  margin-right: 2.4em;
+  color: royalblue;
+}
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  h1,
+  h2 {
+    font-size: 1.2em;
+  }
+
+  .blogimg {
+    max-width: 300px;
+  }
+
+  .commentSection {
+    overflow: hidden;
+  }
+  .blogtxt {
+    margin-left: 2.4em;
+    margin-right: 2.4em;
+  }
+}

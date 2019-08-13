@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="Description" content="WWW Programmierung Hausarbeit WS2018">
+    <meta name="author" content="Jonas Leonhard, 611179">
+
+    <link rel = "stylesheet" type = "text/css" href = "/views/indexstyle.css"media="screen" />
+
+    <title> Make Entry </title>
+    {% endblock %}
+</head>
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        {% if not user %}
+        <li class = "register"><a href="/user/register">Register</a></li>
+        <li class = "login"><a href="/user/login">Login</a></li>
+        {% endif %}
+        {% if user %}
+        <li><a href="/entry"  class="active" >Entry</a></li>
+        <li><a href ="/user/get/{{ user.username }}">Profile</a></li>
+        <li class = "logout"><a href="/user/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+</div>
+

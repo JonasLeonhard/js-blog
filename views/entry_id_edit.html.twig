@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="Description" content="WWW Programmierung Hausarbeit WS2018">
+        <meta name="author" content="Jonas Leonhard, 611179">
+
+        <link rel = "stylesheet" type = "text/css" href = "/views/indexstyle.css"media="screen" />
+        <link rel ="stylesheet" type ="text/css" href ="/views/loginstyle.css"media="screen" />
+        <title>{{ data.id|escape }} : {{ data.title }}</title>
+    {% endblock %}
+</head>
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        {% if not user %}
+            <li class = "register"><a href="/user/register">Register</a></li>
+            <li class = "login"><a href="/user/login">Login</a></li>
+        {% endif %}
+        {% if user %}
+            <li><a class="active" href="/entry">Entry</a></li>
+            <li><a href ="/user/get/{{ user.username }}">Profile</a></li>
+            <li class = "logout"><a href="/user/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<body>
+<div class="wrapper">
+
+    <h1>{{ data.username }}: Change your post below</h1>
+<form action="/entry/{{data.postid|escape }}/edited" method="post" enctype=="application/x-www-form-urlencoded">
+    <div id="form">
+        <input type="hidden" name="form[token]"
+               value="{{ form['token'] }}">
+        <div>
+            <label for="form_title"
+                   class="required">Titel</label>
+            <br />
+            <input type="text" value={{ data.title|escape }} id="form_title"
+                   size="80" name="form[title]"
+                   value="{{ form['title'] }}" required>
+            {% if error['title'] %}
+                <p class="Form-error">{{ error['title'] }}</p>{%
+                endif %}
+        </div>
+        <p></p>
+        <div>
+            <label
+                    for="blog_text"
+                    class = "required">BlogText
+            </label>
+            <br />
+            <input type = "text" value={{ data.blogText|escape }} id="form_blogText"
+                   size ="80" name = "form[blogText]"
+                   value= "{{ form['blogText'] }}" required>
+            {% if error['blogText'] %}
+                <p class="Form-error">{{ error['blogText'] }}</p>
+            {% endif %}
+        </div>
+<p></p>
+        <div>
+            <label
+                    for="blog_teaserText"
+                    class = "required">TeaserText
+            </label>
+            <br />
+            <input type = "text" value = {{ data.teaserText|escape }} id="form_teaserText"
+                   size ="80" name = "form[teaserText]"
+                   value = " {{ form['teaserText'] }}" required>
+            {% if error['teaserText'] %}
+                <p class="Form-error">{{ error['teaserText'] }}</p>
+            {% endif %}
+        </div>
+        <p></p>
+        <!-- .... -->
+        <button class="button" type="submit" id="form_save"
+                name="form[save]">Speichern</button>
+    </div>
+</form>
+</div>
+</body>
+</html>

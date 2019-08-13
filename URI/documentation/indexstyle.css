@@ -1,0 +1,96 @@
+/* CSS Document for index.html.twig */
+body {
+  background: #333;
+  color: white;
+}
+
+h1,
+h2 {
+  font-family: "Abel Regular";
+  letter-spacing: 1px;
+  font-size: 1.5em;
+  color: #f44336;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  color: darkgrey;
+}
+
+a,
+h1,
+.teasertxt:hover {
+  color: royalblue;
+}
+
+/*navbar top*/
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #282828;
+  border: 1px solid #2d2d2d;
+}
+
+.navbar li {
+  float: left;
+}
+
+.navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.navbar li a:hover {
+  background-color: #212121;
+}
+
+/*add color to active link to let user know which page hes on*/
+.navbar .active {
+  background-color: #606060;
+}
+
+/*set logout to right*/
+.navbar li:last-child {
+  float: right;
+}
+
+/*register style- alter alter-danger*/
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+/*flash messages:*/
+.flash {
+  padding: 20px;
+  margin-bottom: 15px;
+  color: white;
+  background-color: #118400;
+  font-size: 1em;
+}
+
+.footer {
+  background: #282828;
+}
+
+.button {
+  background-color: #212121;
+  border: none;
+  border-radius: 5%;
+  color: white;
+}
+.button:hover {
+  background-color: #181818;
+  cursor: pointer;
+}

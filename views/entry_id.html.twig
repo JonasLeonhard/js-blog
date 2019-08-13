@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    {% block head %}
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+            <meta name="Description" content="WWW Programmierung Hausarbeit WS2018">
+            <meta name="author" content="Jonas Leonhard, 611179">
+
+            <link rel = "stylesheet" type = "text/css" href = "/views/indexstyle.css"media="screen" />
+            <link rel = "stylesheet" type = "text/css" href = "/views/entryidstyle.css"media="screen" />
+
+            <title>{{ data.id|escape }} : {{ data.title }}</title>
+    {% endblock %}
+</head>
+
+<div class="navbar">
+    <ul>
+        <li><a class="active" href="/">Home</a></li>
+        {% if not user %}
+            <li class = "register"><a href="/user/register">Register</a></li>
+            <li class = "login"><a href="/user/login">Login</a></li>
+        {% endif %}
+        {% if user %}
+            <li><a href="/entry">Entry</a></li>
+            <li><a href ="/user/get/{{ user.username }}">Profile</a></li>
+            <li class = "logout"><a href="/user/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<body>
+{% if user %}
+
+    <!-- THIS POST IS BY YOU-->
+    {% if data.username == user.username %}
+        <div class="flash"> THIS IS MY POST!</div>
+
+        <form action= /entry/5/edit method="post">
+            <input class="button" type="submit" value="Edit Post...">
+        </form>
+        <form action = /entry/{{ data.postid |escape}}/delete method="post">
+            <input class="button" type ="submit" value = "Delete Post...">
+        </form>
+    {% endif %}
+
+
+{% endif %}
+
+<div class="postById">
+
+    <!-- BLOG USERNAME/PROFILEIMG-->
+    <div class="blogusername">
+
+        <!-- PROFILE IMG OF USER -->
+        <img class = "profileimg" src="/views/uploads/{{ data.profileimg }}">
+
+        <!-- BLOG USERNAME-->
+        {{ data.username|escape }}
+    </div>
+
+    <div class="blogpostcenter">
+        <!-- BLOG TITLE/IMG/TEASER-->
+        <div class = "blogpost">
+
+            <!-- BLOG TITLE -->
+            <div class="blogtitle">
+                <!--data.postid|escapeTITLE:--><h1>{{ data.title|escape }}</h1>
+            </div>
+
+            <!-- BLOG IMG -->
+            {% if data.postimg != "null" %}
+            <img class = "blogimg" src="/views/uploads/{{ data.postimg }}">
+            {% endif %}
+
+            <!-- BLOG TEXT -->
+            <div class="blogtext">
+                {{ data.blogText }}
+            </div>
+
+            <!-- BLOG TEASERTEXT-->
+            <div class="teasertxt">
+                {{ data.teaserText|escape }}
+            </div>
+        </div>
+            <p>posted at {{ data.publishDate.getDate()|escape }}.{{ data.publishDate.getMonth()+1 |escape }}.{{ data.publishDate.getFullYear()|escape }}
+                - {{ data.publishDate.getHours() |escape }}:{{ data.publishDate.getMinutes() |escape }}</p>
+    </div>
+
+
+    <!-- BLOG COMMENT SECTION-->
+    <div class = "commentSection">
+        <div class="title"><p>Comment Section:</p></div>
+
+        <!-- ADD COMMENT FORM:-->
+        <form action="/entry/{{ data.postid }}/comment" method="post">
+            <div id="form">
+                <input type="hidden" name="form[token]"
+                       value="{{ form['token'] }}">
+                <div>
+                    <label for="form_comment"
+                           class="required">Comment</label>
+                    <br />
+                    <input type="text" id="form_comment"
+                           size="80" name="form[comment]"
+                           value="{{ form['comment'] }}"required>
+                    {% if error['comment'] %}
+                        <p class="Form-error">{{ error['comment'] }}</p>{%
+                        endif %}
+                </div>
+                <p></p>
+            </div>
+
+            <!-- .... -->
+            <button class= "button" type="submit" id="form_save"
+                    name="form[save]">Submit</button>
+        </form>
+
+
+
+
+                <p></p>
+                <!-- COMMENTS -->
+                {% for c in comment %}
+
+                    <div class ="usrcom">
+                    <div class="username">{{ c.username }}:</div>
+                    <div class="comment">{{ c.comment }}</div>
+
+
+                    {% if user.username == c.username %}
+                    <form action = /entry/{{ c.postid |escape}}/deletecomment/{{ c.commentid|escape }} method="post">
+                        <input class="button delete" type ="submit" value = "Delete Comment">
+                    </form>
+                    {% endif %}
+                </div>
+                    <p></p>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

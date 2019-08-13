@@ -1,0 +1,21 @@
+/*CSS DOCUMENT FOR USER_REGISTER.html.twig*/
+.wrapper{
+    text-align: left;
+    padding-left: 30%;
+
+}
+
+.label{
+    background: #282828;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    h1,h2{
+        font-size: 1.2em;
+    }
+
+    .wrapper{
+        padding-left:0px;
+        overflow:hidden;
+    }
+}

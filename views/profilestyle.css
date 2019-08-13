@@ -1,0 +1,40 @@
+/* CSS Document for user_profile.html.twig - extends indexstyle.css */
+
+.username{
+    color: red;
+}
+
+.name {
+
+}
+.email{
+
+}
+
+.profileimg{
+    vertical-align: middle;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.wrapper{
+    text-align: left;
+    padding-left: 30%;
+
+}
+
+.label{
+    background: #282828;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    h1,h2{
+        font-size: 1.2em;
+    }
+
+    .wrapper{
+        padding-left:0px;
+        overflow:hidden;
+    }
+}

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="Description" content="WWW Programmierung Hausarbeit WS2018">
+        <meta name="author" content="Jonas Leonhard, 611179">
+
+        <link rel = "stylesheet" type = "text/css" href = "/views/indexstyle.css"media="screen" />
+        <link rel ="stylesheet" type ="text/css" href = "/views/entryaddstyle.css"media="screen" />
+        <title> Make Entry </title>
+    {% endblock %}
+</head>
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        {% if not user %}
+            <li class = "register"><a href="/user/register">Register</a></li>
+            <li class = "login"><a href="/user/login">Login</a></li>
+        {% endif %}
+        {% if user %}
+            <li><a href="/entry"  class="active" >Entry</a></li>
+            <li><a href ="/user/get/{{ user.username }}">Profile</a></li>
+            <li class = "logout"><a href="/user/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<body>
+{% if message.error %}
+    <div class ="alert">{{ message.error }}</div>
+{% endif %}
+
+{% if message.blogtxterror %}
+    <div class ="alert">{{ message.blogtxterror }}</div>
+{% endif %}
+
+{% if message.teasertxterror %}
+    <div class ="alert">{{ message.teasertxterror }}</div>
+{% endif %}
+<p></p>
+<div class="wrapper">
+    <h1>Create a new Blogpost as {{ user.username }}!</h1>
+
+<form action="/entry/add" method="post" enctype="multipart/form-data">
+    <div id="form">
+        <input type="hidden" name="form[token]"
+               value="{{ form['token'] }}">
+        <div>
+            <label for="form_title"
+                   class="required">Titel</label>
+            <br />
+            <input type="text" id="form_title"
+                   size="80" name="form[title]"
+                   value="{{ form['title'] }}">
+            {% if error['title'] %}
+                <p class="Form-error">{{ error['title'] }}</p>{%
+                endif %}
+        </div>
+<p></p>
+        <div>
+            <label
+                for="blog_text"
+                class = "required">BlogText
+            </label>
+            <br />
+            <input type = "text" id = "form_blogText"
+                   size ="80" name = "form[blogText]"
+                   value = "{{ form['blogText'] }}">
+            {% if error['blogText'] %}
+            <p class="Form-error">{{ error['blogText'] }}</p>
+            {% endif %}
+        </div>
+<p></p>
+        <div>
+            <label
+                    for="blog_teaserText"
+                    class = "required">TeaserText
+            </label>
+            <br />
+            <input type = "text" id = "form_teaserText"
+                   size ="80" name = "form[teaserText]"
+                   value = "{{ form['teaserText'] }}">
+            {% if error['teaserText'] %}
+                <p class="Form-error">{{ error['teaserText'] }}</p>
+            {% endif %}
+        </div>
+<p></p>
+        <div>
+            <label for="form_postimg"
+            >
+                {% if postimg %}
+                    {{ postimg }} loaded
+                {% else %}
+                    Post Image {{ msg }}
+                {% endif %}
+            </label>
+            <br />
+            {% if postimg %}
+
+            {% else %}
+                <input type="file" id="form_postimg"
+                       size="80" name="form[postimg]"
+                       value="{{ form['postimg'] }}">
+            {% endif %}
+
+            {% if error['postimg'] %}
+                <p class="Form-error">{{ error['postimg'] }}</p>{%
+                endif %}
+        </div>
+        <p></p>
+        <!-- .... -->
+        <button class= "button" type="submit" id="form_save"
+                name="form[save]">Post</button>
+    </div>
+</form>
+</div>
+</body>
+
+</html>

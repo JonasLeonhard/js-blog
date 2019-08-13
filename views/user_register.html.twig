@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    {% block head %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <meta name="Description" content="WWW Programmierung Hausarbeit WS2018">
+        <meta name="author" content="Jonas Leonhard, 611179">
+
+        <link rel = "stylesheet" type = "text/css" href = "/views/indexstyle.css"media="screen" />
+        <link rel = "stylesheet" type ="text/css" href ="/views/registerstyle.css" media="screen" />
+        <title>{{ pagetitle|escape }}</title>
+
+    {% endblock %}
+</head>
+
+<div class="navbar">
+    <ul>
+        <li><a href="/">Home</a></li>
+        {% if not user %}
+            <li class = "register"><a  class="active" href="/user/register">Register</a></li>
+            <li class = "login"><a href="/user/login">Login</a></li>
+        {% endif %}
+        {% if user %}
+            <li><a href="/entry">Entry</a></li>
+            <li><a href ="/user/get/{{ user.username }}">Profile</a></li>
+            <li class = "logout"><a href="/user/logout">Logout</a></li>
+        {% endif %}
+    </ul>
+</div>
+
+<body>
+<div class ="wrapper">
+    <h2>Register</h2>
+    <p>fill in the form to register as a new User</p>
+
+    {% if errors %}
+    {% for err in  errors  %}
+        <div class ="alert alert-danger">
+             {{ err.msg }}
+        </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if usernametaken %}
+        <div class = "alert alert-danger">
+             This username is already taken! Please chose another one!
+        </div>
+    {% endif %}
+
+    <p>
+
+    </p>
+    <form action = "/user/register" method="post" enctype="multipart/form-data">
+        <div id = "form">
+            <input type="hidden" name="form[token]"
+                   value="{{ form['token'] }}">
+            <div>
+                <label class="label" for="form_name"
+                       class="required">Name</label>
+                <br />
+                <input type="text" id="form_name"
+                       size="80" name="form[name]"
+                       {% if name %} value = {{ name }}
+                    {% else %} value="{{ form['name'] }}"
+                    {% endif %}>
+                {% if error['name'] %}
+                    <p class="Form-error">{{ error['name'] }}</p>{%
+                    endif %}
+            </div>
+            <p></p>
+            <div>
+                <label class="label" for="form_username"
+                       class="required">Username</label>
+                <br />
+                <input type="text" id="form_username"
+                       size="80" name="form[username]"
+                    {% if username %} value = {{ username }}
+                    {% else %} value="{{ form['username'] }}"
+                {% endif %}>
+                {% if error['username'] %}
+                    <p class="Form-error">{{ error['username'] }}</p>{%
+                    endif %}
+            </div>
+            <p></p>
+
+        <div>
+            <label class="label" for="form_email"
+                   class="required">Email</label>
+            <br />
+            <input type="email" id="form_email"
+                   size="80" name="form[email]"
+                    {% if email %} value = {{ email }}
+                    {% else %} value="{{ form['email'] }}"
+                    {% endif %}>
+            {% if error['email'] %}
+                <p class="Form-error">{{ error['email'] }}</p>{%
+                endif %}
+        </div>
+        <p></p>
+        <div>
+            <label class="label" for="form_password"
+                   class="required">Password</label>
+            <br />
+            <input type="password" id="form_password"
+                   size="80" name="form[password]"
+                   value="{{ form['password'] }}">
+            {% if error['password'] %}
+                <p class="Form-error">{{ error['password'] }}</p>{%
+                endif %}
+        </div>
+<p></p>
+        <div>
+            <label class="label" for="form_confirmpassword"
+                   class="required">Confirm Password</label>
+            <br />
+            <input type="password" id="form_confirmpassword"
+                   size="80" name="form[confirmpassword]"
+                   value="{{ form['confirmpassword'] }}">
+            {% if error['confirmpassword'] %}
+                <p class="Form-error">{{ error['confirmpassword'] }}</p>{%
+                endif %}
+        </div>
+<p></p>
+            <div>
+                <label class="label" for="form_profileimg"
+                       >
+                    {% if profileimg %}
+                        {{ profileimg }} loaded
+                        {% else %}
+                            Profile Image {{ msg }}
+                    {% endif %}
+                   </label>
+                <br />
+                {% if profileimg %}
+
+                    {% else %}
+                        <input class="button" type="file" id="form_profileimg"
+                               size="80" name="form[profileimg]"
+                               value="{{ form['profileimg'] }}">
+                {% endif %}
+
+                {% if error['profileimg'] %}
+                    <p class="Form-error">{{ error['profileimg'] }}</p>{%
+                    endif %}
+            </div>
+            <!-- .... -->
+            <p></p>
+        <button class="button" type="submit" id="form_save"
+                name="form[save]">Register...</button>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>
