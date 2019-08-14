@@ -1,5 +1,5 @@
 # js-blog
-A simple node.js Javascript Blog.
+A node.js Javascript Blog.
 
 Libraries Used: 
 Node Express Routing, 
