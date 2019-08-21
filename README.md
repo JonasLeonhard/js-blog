@@ -1,28 +1,28 @@
 # js-blog
 A node.js Javascript Blog.
 
-Libraries Used: 
-Node Express Routing, 
-Nunjucks Render Engine, 
-Passport for Authentication, 
-Multer File Upload/Storage, 
-Flash Messages Notifications,
-Password Encryption using bcrypt,
-Database sqlite3,
-Templating with Twig,
+Libraries used: 
+Node Express routing, 
+Nunjucks render engine, 
+Passport for authentication, 
+Multer file upload/storage, 
+flash messages notifications,
+password encryption using Bcrypt,
+database Sqlite3,
+templating with Twig,
 
 
 ![Mask](../master/readme/Screen01.png)
--List of Blogposts
+-List of blogposts
 
 
 ![Mask](../master/readme/Screen02.png)
--Login with your Username and Password
+-Login with your username and password
 
 
 ![Mask](../master/readme/Screen03.png)
--Register for a new Account
+-Register for a new account
 
 
 ![Mask](../master/readme/Screen04.png)
--Leave a Comment on your favorite Blogposts
+-Leave a comment on your favorite blogposts
